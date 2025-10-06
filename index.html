@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AttendEase QR-Based Attendance System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <i class="fas fa-qrcode"></i>
+  <h1>AttendEase</h1>
+  <p>Advanced QR-Based Attendance System | Powered by Firebase</p>
+</header>
+
+<main>
+  <!-- Authentication Section -->
+  <section id="authSection">
+    <h2><i class="fas fa-user-shield"></i> User Authentication</h2>
+    <div id="userInfo" style="display:none;">
+      <span>Logged in as: <span id="userEmail"></span></span>
+      <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+    <form id="loginForm">
+      <label for="email"><i class="fas fa-envelope"></i> Email</label>
+      <input type="email" id="email" placeholder="professor@example.com" required />
+      <label for="password"><i class="fas fa-lock"></i> Password</label>
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+    </form>
+    <div id="authMsg"></div>
+  </section>
+
+  <!-- Session Creation -->
+  <section id="sessionCreation" style="display:none;">
+    <h2><i class="fas fa-plus-circle"></i> Create Attendance Session</h2>
+    <form id="sessionForm">
+      <label for="sessionName"><i class="fas fa-tag"></i> Session Name</label>
+      <input type="text" id="sessionName" required placeholder="e.g. CS101 Lecture 5" />
+      <div class="flex-row">
+        <div class="flex-grow">
+          <label for="sessionDate"><i class="fas fa-calendar"></i> Date</label>
+          <input type="date" id="sessionDate" required />
+        </div>
+        <div class="flex-grow">
+          <label for="sessionTime"><i class="fas fa-clock"></i> Time</label>
+          <input type="time" id="sessionTime" required />
+        </div>
+      </div>
+      <button type="submit"><i class="fas fa-qrcode"></i> Create Session & Generate QR Code</button>
+    </form>
+    <div id="qrCode"></div>
+  </section>
+
+  <!-- Student Attendance -->
+  <section id="studentScan">
+    <h2><i class="fas fa-mobile-alt"></i> Student Attendance Scan</h2>
+    <p>Students scan the QR code displayed in class to mark their attendance. Enter the session ID from the QR code below.</p>
+    <form id="studentForm">
+      <label for="studentName"><i class="fas fa-user"></i> Your Full Name</label>
+      <input type="text" id="studentName" placeholder="e.g. Jane Doe" required />
+      <label for="sessionIdInput"><i class="fas fa-key"></i> Enter Session ID (from QR code)</label>
+      <input type="text" id="sessionIdInput" placeholder="Session ID" required />
+      <button type="submit"><i class="fas fa-check-circle"></i> Mark Attendance</button>
+    </form>
+    <div id="studentMsg"></div>
+  </section>
+
+  <!-- Admin Panel -->
+  <section id="adminPanel" style="display:none;">
+    <h2><i class="fas fa-database"></i> Admin Panel - Attendance Records</h2>
+    <p>View and download attendance lists for sessions in real-time.</p>
+    <label for="adminSessionSelect"><i class="fas fa-list"></i> Select Session</label>
+    <select id="adminSessionSelect">
+      <option value="" disabled selected>-- Select Session --</option>
+    </select>
+    <div id="attendanceListContainer"></div>
+    <button id="downloadCSVBtn" style="display:none;"><i class="fas fa-download"></i> Download Attendance CSV</button>
+  </section>
+
+  <!-- Payment Info -->
+  <section id="paymentUseCase">
+    <h2><i class="fas fa-credit-card"></i> Payment Use Case</h2>
+    <p>AttendEase can be used for paid events where attendance is mandatory, such as workshops or seminars...</p>
+  </section>
+</main>
+
+<footer>
+  <i class="fas fa-shield-alt"></i> &copy; 2025 AttendEase | Developed for IM2 Midterm Project. All rights reserved.
+</footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+<!-- QR Code library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<!-- External JS -->
+<script src="script.js"></script>
+</body>
+</html>
